@@ -38,8 +38,3 @@ high_alcohol_batches.show()
 # For example, finding average sales per location:
 avg_sales_per_location = df.groupBy('Location').agg(avg('Total_Sales').alias('Average_Sales'))
 avg_sales_per_location.show()
-
-output_path = "E:\\Dev\\PySpark-Project\\analytics_results.csv"
-
-# Save the DataFrame to a CSV file
-df.write.csv(output_path, header=True, mode="overwrite")
