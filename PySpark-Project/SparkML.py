@@ -1,13 +1,16 @@
+# import file for all the dependencies
 from pyspark.sql import SparkSession
 from pyspark.ml.regression import LinearRegression
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.evaluation import RegressionEvaluator
 import Spark
+from sklearn.model_selection import train_test_split
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+import Spark
 
-# Assuming Spark.df is a PySpark DataFrame with columns "Total_Sales", "Volume_Produced"
-
-                                                                                
 df = Spark.df
 df.select("Total_Sales").show()
 
@@ -46,7 +49,7 @@ predictions.select("features", "Total_Sales", "prediction").show()
 assembler_pipeline = VectorAssembler(inputCols=["Total_Sales", "Volume_Produced"], outputCol="__features")
 
 # Set "Total_Sales" as the label column
-lr_pipeline = LinearRegression(featuresCol="__features", labelCol="Total_Sales", regParam=0.01)
+lr_pipeline = LinearRegression(featuresCol="__features", labelCol=["Total_Sales","Volume_Produced" ], regParam=0.01)
 
 # Create a pipeline
 pipeline = Pipeline(stages=[assembler_pipeline, lr_pipeline])
