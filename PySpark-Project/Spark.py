@@ -1,5 +1,11 @@
 from pyspark.sql import SparkSession as sk
 from pyspark.sql.functions import col, avg, max, min
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.regression import RandomForestRegressor
+from pyspark.ml import Pipeline
+from pyspark.ml.classification import RandomForestClassifier
+from pyspark.ml.feature import StringIndexer
+
 
 # Initialize Spark session
 spark = sk.builder \
@@ -7,8 +13,7 @@ spark = sk.builder \
     .getOrCreate()
 
 # Read the CSV file into a Pandas DataFrame
-df = spark.read.csv("C:\\Users\\LENOVO\\Desktop\\New "
-                    "folder\\PySpark-Project\\PySpark-Project\\brewery_data_complete_extended.csv", header=True,
+df = spark.read.csv("brewery_data_complete_extended.csv", header=True,
                     inferSchema=True)
 
 # Show the PySpark DataFrame
