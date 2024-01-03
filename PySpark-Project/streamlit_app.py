@@ -1,5 +1,5 @@
 import streamlit as st
-import Spark
+from Spark import analyze_brewery_data  # Assuming your function is named analyze_brewery_data
 
 
 def main():
@@ -7,9 +7,9 @@ def main():
 
     # Load data and perform analysis
     csv_path = "brewery_data_complete_extended.csv"
-    Spark.analyze_brewery_data("brewery_data_complete_extended.csv")
-    Spark.analyze_brewery_data("brewery_data_complete_extended.csv")
-    descriptive_stats, average_alcohol_content, max_alcohol_beer_style, max_sales_location, max_quality_batch_id, high_alcohol_batches, avg_sales_per_location = Spark.analyze_brewery_data(csv_path)
+    result = analyze_brewery_data(csv_path)
+
+    descriptive_stats, average_alcohol_content, max_alcohol_beer_style, max_sales_location, max_quality_batch_id, high_alcohol_batches, avg_sales_per_location = result
 
     # Display Descriptive Statistics
     st.subheader("Descriptive Statistics:")
