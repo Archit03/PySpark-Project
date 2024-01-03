@@ -95,7 +95,7 @@ def main():
     # Visualize Distribution of Beer Styles (Pie Chart)
     st.subheader("Distribution of Beer Styles (Pie Chart)")
     beer_style_distribution = spark_instance.df.groupBy('Beer_Style').count().toPandas()
-    st.pie_chart(beer_style_distribution.set_index('Beer_Style')['count'])
+    st.bar_chart(beer_style_distribution.set_index('Beer_Style')['count'])
 
     # Stop Spark session to release resources
     spark_instance.stop()
